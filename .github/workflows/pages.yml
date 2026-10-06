@@ -1,0 +1,65 @@
+name: Portfolio Pages
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: python scripts/summary.py --self-test
+      - name: Desktop and mobile checks
+        id: tests
+        run: npm test
+      - name: Test summary
+        if: always()
+        env:
+          EXPECTED_TESTS: '6'
+          TEST_OUTCOME: ${{ steps.tests.outcome }}
+          JUNIT_PATTERN: test-results/junit.xml
+          TEST_SCOPE: 'PT-BR/EN, filters, language navigation, mobile overflow and axe checks. Automated accessibility checks do not replace manual review.'
+        run: python scripts/summary.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: portfolio-tests
+          path: |
+            test-results/
+            playwright-report/
+            results/summary.md
+          retention-days: 14
+          if-no-files-found: error
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: public
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5
