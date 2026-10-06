@@ -24,6 +24,8 @@ npm test
 
 CI checks both languages on desktop and mobile: combined filters, empty state, navigation, link destinations, overflow and axe. Six tests; failures, skips or incomplete reports block deployment. Summary, JUnit, HTML and failure traces are retained as artifacts for 14 days. Automated accessibility checks do not certify full compliance.
 
-Only `public/` is deployed. Every push to `main` must pass verification before publishing. SEO includes canonical URLs, hreflang, a sitemap and factual Person structured data; it does not guarantee search rankings.
+Only `public/` is deployed. Every push to `main` must pass verification before publishing. After deployment, the pipeline compares the public HTML, assets, robots.txt and sitemap with the published files.
+
+SEO includes canonical URLs, hreflang, a sitemap and ProfilePage/Person data, with a shared identity across both languages and references to GitHub and LinkedIn. Project content is present in the HTML and does not require JavaScript to read. This supports crawling, but does not prove indexing or guarantee search rankings or AI recommendations. [Google guidance for AI features](https://developers.google.com/search/docs/appearance/ai-features).
 
 [Official GitHub Pages Actions workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).

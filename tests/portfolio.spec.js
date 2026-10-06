@@ -5,6 +5,15 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
   test(`catalog, filters and accessibility: ${lang}`, async ({ page }) => {
     await page.goto(path);
     await expect(page.locator('html')).toHaveAttribute('lang', lang);
+    const canonical = `https://brunobaccari.github.io${path}`;
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
+    await expect(page.locator('link[hreflang="pt-BR"]')).toHaveAttribute('href', 'https://brunobaccari.github.io/');
+    await expect(page.locator('link[hreflang="en"]')).toHaveAttribute('href', 'https://brunobaccari.github.io/en/');
+    const profile = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
+    expect(profile).toMatchObject({ '@type': 'ProfilePage', url: canonical, inLanguage: lang,
+      mainEntity: { '@type': 'Person', '@id': 'https://brunobaccari.github.io/#bruno-baccari', name: 'Bruno Baccari',
+        sameAs: ['https://github.com/brunobaccari', 'https://www.linkedin.com/in/baccari/'] } });
+    await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
     await expect(page.locator('.project-card:visible')).toHaveCount(19);
     await page.getByRole('button', { name: ai, exact: true }).click();
     await expect(page.locator('.project-card:visible')).toHaveCount(2);
