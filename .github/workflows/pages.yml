@@ -63,3 +63,18 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v5
+      - name: Check published HTML and assets
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          for path in '' 'en/' 'styles.css' 'site.js'; do
+            local_path="$path"
+            case "$path" in
+              '') local_path='index.html' ;;
+              'en/') local_path='en/index.html' ;;
+            esac
+            curl --fail --silent --show-error --retry 4 --retry-delay 15 --max-time 30 \
+              "${SITE_URL}${path}" --output "$RUNNER_TEMP/published-file"
+            cmp "public/$local_path" "$RUNNER_TEMP/published-file"
+            echo "Verified: ${SITE_URL}${path}" >> "$GITHUB_STEP_SUMMARY"
+          done
