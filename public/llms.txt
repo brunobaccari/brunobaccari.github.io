@@ -1,0 +1,54 @@
+# Bruno Baccari — QA & Automation
+
+> Portfólio de Bruno Baccari, especialista em QA e automação orientada a IA, em Limeira, São Paulo, Brasil. Projetos públicos de testes web, API e mobile, contratos, acessibilidade, performance e avaliações de IA. Conteúdo em português brasileiro e inglês.
+
+Bruno Baccari is a QA and automation specialist based in Limeira, Brazil. His portfolio covers test strategy, failure investigation, AI-assisted test automation and evaluation of AI systems. It links implementation, test scope and GitHub Actions runs rather than relying on technology names alone.
+
+The website describes his use of Codex, Cursor and Antigravity with project context and internal QA skills, his combined QA/Product Owner role at MB Labs, and past conversational AI testing at Blis AI. GitHub and LinkedIn below identify the same person.
+
+Each repository documents its own scope and execution. Offline evaluator or LangChain tests are separate from live model evaluations. Performance smoke tests do not measure production capacity. Automated accessibility checks do not replace manual review. Actions results belong to a particular commit and run; downloadable artifacts have limited retention.
+
+## Portfolio and profile
+
+- [Portfólio em português](https://brunobaccari.github.io/): Apresentação, projetos, contexto profissional e contato.
+- [Portfolio in English](https://brunobaccari.github.io/en/): English version of the same portfolio.
+- [Catálogo técnico em português — Markdown](https://github.com/brunobaccari/brunobaccari/blob/main/PORTFOLIO.md): Cenários, decisões e limites dos projetos.
+- [Technical catalog in English — Markdown](https://github.com/brunobaccari/brunobaccari/blob/main/PORTFOLIO.en.md): Project scope and engineering decisions.
+- [GitHub](https://github.com/brunobaccari): Public source repositories.
+- [LinkedIn](https://www.linkedin.com/in/baccari/): Professional profile and experience.
+
+## AI evaluation and context
+
+- [pytest · OpenRouter evaluations](https://github.com/brunobaccari/pytest-openrouter-evals): Response contracts, sources, abstention, context, prompt injection and HTTP 429 handling. Offline evaluator tests and real provider calls run separately.
+- [LangChain · Grounding tests](https://github.com/brunobaccari/langchain-grounding-tests): Current-policy selection, allowed references, abstention and strict parsing. Offline chain tests, not a live model benchmark.
+
+## Web automation and accessibility
+
+- [Playwright · Embedded integrations](https://github.com/brunobaccari/playwright-embedded-integrations): Iframe isolation, context reload, legacy frameset navigation and real cross-origin audio playback.
+- [Playwright · Checkout](https://github.com/brunobaccari/playwright-checkout-quality): Purchase flow, validation and cart recalculation after changing products.
+- [Playwright · Accessibility](https://github.com/brunobaccari/playwright-accessibility): Keyboard, focus, labels and axe checks, including a negative control for known defects.
+- [Cypress · Catalog](https://github.com/brunobaccari/cypress-catalog-quality): UI/API consistency and restrictions on product changes by ordinary users.
+- [CodeceptJS · Web flows](https://github.com/brunobaccari/codeceptjs-web-flows): Hosted Selenium forms, Unicode, readonly/disabled fields, uploads and asynchronous changes, using the Playwright helper.
+- [Robot Framework · Selenium checkout](https://github.com/brunobaccari/robot-selenium-checkout): Login, purchase, cart and checkout resumption through reusable Robot keywords.
+- [Selenium · SauceDemo](https://github.com/brunobaccari/selenium-saucedemo-tests): Catalog, sorting, product details and blocked access after logout.
+- [Cypress · ServeRest](https://github.com/brunobaccari/serverest-cypress): UI and API tests with CI reports and videos.
+
+## APIs, contracts and performance
+
+- [Postman · Newman HTTP contracts](https://github.com/brunobaccari/postman-newman-http-contracts): Unicode, encoding, JSON types, status and authentication on hosted Postman Echo.
+- [pytest · Booking API](https://github.com/brunobaccari/pytest-api-booking): Create, read, update, delete, persistence and authorization on Restful Booker.
+- [Pact · API contracts](https://github.com/brunobaccari/pact-api-contracts): Consumer contracts against hosted Restful Booker, deliberate type mismatch and verified cleanup of owned records.
+- [Java · WireMock shipping](https://github.com/brunobaccari/java-wiremock-shipping): Shipping contracts, timeout handling, invalid responses and recovery of a simulated service.
+- [k6 · API performance](https://github.com/brunobaccari/k6-api-performance): Small hosted QuickPizza smoke suite covering contracts, restrictions, authentication and time limits.
+
+## Mobile automation
+
+- [Robot Framework · Appium Android cart](https://github.com/brunobaccari/robot-appium-android-cart): Native cart quantity, totals, removal, background resumption and restart using the official Sauce Labs APK.
+- [Detox · React Native lifecycle](https://github.com/brunobaccari/detox-react-native-lifecycle): UI state, background/resumption and process restart in the official Wix example.
+- [Espresso · Android intents](https://github.com/brunobaccari/espresso-android-intents): Intents, contact result/cancellation and Activity recreation; dialing is intercepted.
+- [Maestro · Android checkout](https://github.com/brunobaccari/maestro-android-checkout): Purchase journey, quantities and negative cases in My Demo App, running on an Android emulator in CI.
+
+## Optional
+
+- [Website source](https://github.com/brunobaccari/brunobaccari.github.io): Static website and deployment checks.
+- [Sitemap](https://brunobaccari.github.io/sitemap.xml): Canonical Portuguese and English page URLs.

@@ -29,3 +29,5 @@ Somente `public/` é publicado. Cada push em `main` passa pelas verificações a
 SEO inclui canonical, hreflang, sitemap e ProfilePage/Person, com a mesma identidade nas duas versões e referências ao GitHub e LinkedIn. O conteúdo está no HTML, sem exigir execução de JavaScript para ler os projetos. Isso permite rastreamento, mas não comprova indexação nem garante posição em buscas ou recomendações de IA. [Orientação do Google sobre recursos de IA](https://developers.google.com/search/docs/appearance/ai-features).
 
 [Publicação oficial do GitHub Pages por Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+`public/llms.txt` reúne identidade, fontes oficiais e o índice dos projetos para agentes compatíveis com a [proposta llms.txt](https://llmstxt.org/). As páginas apontam para ele com `rel="describedby"`. Ao alterar os projetos, atualize esse índice; ele não é um sinal de ranking garantido nem substitui o sitemap ou o acompanhamento de indexação no Search Console.

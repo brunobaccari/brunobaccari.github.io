@@ -29,3 +29,5 @@ Only `public/` is deployed. Every push to `main` must pass verification before p
 SEO includes canonical URLs, hreflang, a sitemap and ProfilePage/Person data, with a shared identity across both languages and references to GitHub and LinkedIn. Project content is present in the HTML and does not require JavaScript to read. This supports crawling, but does not prove indexing or guarantee search rankings or AI recommendations. [Google guidance for AI features](https://developers.google.com/search/docs/appearance/ai-features).
 
 [Official GitHub Pages Actions workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+`public/llms.txt` provides identity, official sources and a project index for agents supporting the [llms.txt proposal](https://llmstxt.org/). Both pages reference it through `rel="describedby"`. Update this index when projects change; it is not a guaranteed ranking signal and does not replace the sitemap or indexing monitoring in Search Console.

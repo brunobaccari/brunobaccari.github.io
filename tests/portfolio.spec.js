@@ -9,6 +9,7 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
     await expect(page.locator('link[hreflang="pt-BR"]')).toHaveAttribute('href', 'https://brunobaccari.github.io/');
     await expect(page.locator('link[hreflang="en"]')).toHaveAttribute('href', 'https://brunobaccari.github.io/en/');
+    await expect(page.locator('link[rel="describedby"]')).toHaveAttribute('href', '/llms.txt');
     const profile = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
     expect(profile).toMatchObject({ '@type': 'ProfilePage', url: canonical, inLanguage: lang,
       mainEntity: { '@type': 'Person', '@id': 'https://brunobaccari.github.io/#bruno-baccari', name: 'Bruno Baccari',
@@ -32,7 +33,7 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
   });
 }
 
-test('language navigation and project destinations', async ({ page }) => {
+test('language navigation, project destinations and agent index', async ({ page, request }) => {
   await page.goto('/');
   await page.getByRole('link', { name: 'Read in English' }).click();
   await expect(page).toHaveURL(/\/en\/$/);
@@ -41,4 +42,10 @@ test('language navigation and project destinations', async ({ page }) => {
   const links = await page.locator('.project-card .card-links a').evaluateAll(elements => elements.map(e => e.href));
   expect(links).toHaveLength(38);
   for (const link of links) expect(link).toMatch(/^https:\/\/github\.com\/brunobaccari\/[a-zA-Z0-9-]+(?:\/actions)?$/);
+  const response = await request.get('/llms.txt');
+  expect(response.status()).toBe(200);
+  expect(response.headers()['content-type']).toContain('text/plain');
+  const index = await response.text();
+  expect(index).toMatch(/^# Bruno Baccari/);
+  for (const link of links.filter(url => !url.endsWith('/actions'))) expect(index).toContain(`](${link})`);
 });
