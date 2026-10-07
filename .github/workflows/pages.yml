@@ -67,7 +67,7 @@ jobs:
         env:
           SITE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
-          for path in '' 'en/' 'styles.css' 'site.js' 'robots.txt' 'sitemap.xml' 'llms.txt'; do
+          for path in '' 'en/' 'styles.css' 'site.js' 'robots.txt' 'sitemap.xml' 'llms.txt' 'cv/Bruno_Baccari_QA_PTBR.pdf' 'cv/Bruno_Baccari_QA_EN.pdf'; do
             local_path="$path"
             case "$path" in
               '') local_path='index.html' ;;

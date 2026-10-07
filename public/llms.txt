@@ -17,6 +17,11 @@ Each repository documents its own scope and execution. Offline evaluator or Lang
 - [GitHub](https://github.com/brunobaccari): Public source repositories.
 - [LinkedIn](https://www.linkedin.com/in/baccari/): Professional profile and experience.
 
+## Resumes
+
+- [Currículo em português — PDF](https://brunobaccari.github.io/cv/Bruno_Baccari_QA_PTBR.pdf): Download do currículo em português brasileiro.
+- [Resume in English — PDF](https://brunobaccari.github.io/cv/Bruno_Baccari_QA_EN.pdf): Download the English resume.
+
 ## AI evaluation and context
 
 - [pytest · OpenRouter evaluations](https://github.com/brunobaccari/pytest-openrouter-evals): Response contracts, sources, abstention, context, prompt injection and HTTP 429 handling. Offline evaluator tests and real provider calls run separately.
