@@ -38,6 +38,6 @@ Filtros de área e tecnologia combinam com a busca. A URL guarda `area`, `stack`
 
 Referências visuais consultadas em 07/10/2026: [David Ho](https://dswho2.github.io/) (identidade e contato) e [Adam Lim](https://jung028.github.io/) (organização por especialidade). Layout e conteúdo próprios, preservando a paleta creme, azul e escuro.
 
-Na entrada `/`, o idioma do navegador escolhe PT-BR para português e inglês para os demais idiomas. A escolha manual fica no localStorage; `/?lang=pt` força a versão portuguesa e `/en/` abre a inglesa diretamente. Query e fragmento são preservados. Sem JavaScript, ambas as páginas continuam disponíveis como HTML. Tema claro/escuro/sistema usa CSS e preferência local, sem geolocalização ou chamadas externas.
+Na entrada `/`, o idioma do navegador escolhe PT-BR para português e inglês para os demais idiomas. A escolha manual fica no localStorage; `/?lang=pt` força a versão portuguesa e `/en/` abre a inglesa diretamente. Query e fragmento são preservados. Sem JavaScript, ambas as páginas continuam disponíveis como HTML. O tema segue o sistema na primeira visita; um único botão alterna entre claro e escuro e guarda a escolha local. O seletor de idioma mostra a versão exibida. A trajetória profissional e a formação refletem os currículos publicados em `public/cv/`.
 
 [Sagar Gupta](https://sagargupta.online/portfolio-react/) também serviu de referência para superfícies escuras em camadas e brilho ambiente.

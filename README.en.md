@@ -38,6 +38,6 @@ Area and technology filters combine with search. The URL keeps `area`, `stack` a
 
 Visual references reviewed on October 7, 2026: [David Ho](https://dswho2.github.io/) (identity and contact) and [Adam Lim](https://jung028.github.io/) (specialty categories). Original layout and content, keeping the cream, blue and dark palette.
 
-At `/`, browser language selects Portuguese for `pt` and English for other languages. Manual choice is stored in localStorage; `/?lang=pt` forces Portuguese and `/en/` opens English directly. Query and fragment are preserved. Both HTML pages remain accessible without JavaScript. Light/dark/system themes use CSS and local preferences, with no geolocation or external requests.
+At `/`, browser language selects Portuguese for `pt` and English for other languages. Manual choice is stored in localStorage; `/?lang=pt` forces Portuguese and `/en/` opens English directly. Query and fragment are preserved. Both HTML pages remain accessible without JavaScript. The theme follows the system on first visit; one button toggles light/dark and saves the choice locally. The language selector shows the displayed version. Career history and education follow the resumes published in `public/cv/`.
 
 [Sagar Gupta](https://sagargupta.online/portfolio-react/) also informed the layered dark surfaces and ambient glow.

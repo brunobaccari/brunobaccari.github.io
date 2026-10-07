@@ -30,12 +30,6 @@ function filterProjects(updateUrl = true) {
     }
     history.replaceState(null, '', url);
   }
-  const languageLink = document.querySelector('.language');
-  const languageUrl = new URL(languageLink.href);
-  languageUrl.search = location.search;
-  if (languageLink.lang === 'pt-BR') languageUrl.searchParams.set('lang', 'pt');
-  else languageUrl.searchParams.delete('lang');
-  languageLink.href = languageUrl.href;
 }
 for (const button of buttons) {
   button.addEventListener('click', () => {
@@ -62,16 +56,33 @@ function restoreFilters() {
 window.addEventListener('popstate', restoreFilters);
 restoreFilters();
 
-const themeButtons = [...document.querySelectorAll('[data-theme-choice]')];
-function setTheme(value) {
-  document.documentElement.dataset.theme = value;
-  for (const button of themeButtons) button.setAttribute('aria-pressed', String(button.dataset.themeChoice === value));
+const themeButton = document.querySelector('.theme-toggle');
+const systemTheme = matchMedia('(prefers-color-scheme: dark)');
+const english = document.documentElement.lang === 'en';
+function updateThemeButton() {
+  const preference = document.documentElement.dataset.theme;
+  const dark = preference === 'dark' || (preference === 'system' && systemTheme.matches);
+  themeButton.dataset.current = dark ? 'dark' : 'light';
+  const label = english ? (dark ? 'Switch to light theme' : 'Switch to dark theme') : (dark ? 'Ativar tema claro' : 'Ativar tema escuro');
+  themeButton.setAttribute('aria-label', label);
+  themeButton.title = label;
 }
-for (const button of themeButtons) button.addEventListener('click', () => {
-  setTheme(button.dataset.themeChoice);
-  try { localStorage.setItem('portfolio-theme', button.dataset.themeChoice); } catch {}
+themeButton.addEventListener('click', () => {
+  const value = themeButton.dataset.current === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = value;
+  updateThemeButton();
+  try { localStorage.setItem('portfolio-theme', value); } catch {}
 });
-setTheme(document.documentElement.dataset.theme || 'system');
-document.querySelector('.language').addEventListener('click', event => {
-  try { localStorage.setItem('portfolio-language', event.currentTarget.lang === 'en' ? 'en' : 'pt'); } catch {}
+systemTheme.addEventListener('change', updateThemeButton);
+updateThemeButton();
+const languageControl = document.querySelector('#language');
+languageControl.value = english ? 'en' : 'pt';
+languageControl.addEventListener('change', () => {
+  const language = languageControl.value;
+  try { localStorage.setItem('portfolio-language', language); } catch {}
+  const url = new URL(location.href);
+  url.pathname = language === 'pt' ? '/' : '/en/';
+  if (language === 'pt') url.searchParams.set('lang', 'pt');
+  else url.searchParams.delete('lang');
+  location.assign(url);
 });

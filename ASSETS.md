@@ -169,7 +169,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## Theme controls
 
-Sun, Moon and Desktop SVGs: [Radix Icons](https://github.com/radix-ui/icons/tree/main/packages/radix-icons/icons), retrieved 2026-10-07, inlined with accessibility attributes. Framework artwork remains unaltered; Appium and CodeceptJS now use the official color variants.
+Sun and Moon SVGs: [Radix Icons](https://github.com/radix-ui/icons/tree/main/packages/radix-icons/icons), retrieved 2026-10-07, inlined with accessibility attributes. Framework artwork remains unaltered; Appium and CodeceptJS now use the official color variants.
 
 ```text
 MIT License

@@ -5,6 +5,10 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
   test(`catalog, filters and accessibility: ${lang}`, async ({ page }, testInfo) => {
     await page.goto(path);
     await expect(page.locator('html')).toHaveAttribute('lang', lang);
+    await expect(page.locator('.theme-toggle')).toHaveCount(1);
+    await expect(page.locator('#language')).toHaveValue(lang === 'en' ? 'en' : 'pt');
+    await expect(page.locator('.timeline > li')).toHaveCount(4);
+    await expect(page.locator('.timeline h3')).toHaveText(['Mouts TI', 'Blis AI', 'MB Labs', 'BRK Ambiental']);
     const canonical = `https://brunobaccari.github.io${path}`;
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
     await expect(page.locator('link[hreflang="pt-BR"]')).toHaveAttribute('href', 'https://brunobaccari.github.io/');
@@ -53,9 +57,9 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
     await page.locator('#reset-filters').click();
     await page.locator('.needs a[href="?area=ai#projects"]').click();
     await expect(page.locator('.project-card:visible')).toHaveCount(2);
-    await page.locator('.language').click();
+    await page.locator('#language').selectOption(lang === 'en' ? 'pt' : 'en');
     await expect(page.locator('.project-card:visible')).toHaveCount(2);
-    await page.locator('.language').click();
+    await page.locator('#language').selectOption(lang === 'en' ? 'en' : 'pt');
     await page.locator('#reset-filters').click();
     await page.locator('.nav-contact').click();
     await expect(page.locator('#contact')).toBeInViewport();
@@ -66,7 +70,8 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     const audit = await new AxeBuilder({ page }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
     expect(audit.violations).toEqual([]);
-    await page.locator('[data-theme-choice=dark]').click();
+    await page.locator('.theme-toggle').click();
+    await expect(page.locator('.theme-toggle')).toHaveAttribute('data-current', 'dark');
     for (const strip of await page.locator('.project-logos').all()) {
       expect(await strip.evaluate(el => getComputedStyle(el).backgroundImage)).toBe('none');
       expect(await strip.evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
@@ -79,9 +84,9 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
 
 test('language navigation, project destinations and agent index', async ({ page, request }) => {
   await page.goto('/');
-  await page.getByRole('link', { name: 'Read in English' }).click();
+  await page.locator('#language').selectOption('en');
   await expect(page).toHaveURL(/\/en\/$/);
-  await page.getByRole('link', { name: 'Ler em português' }).click();
+  await page.locator('#language').selectOption('pt');
   await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
   const links = await page.locator('.project-card .card-links a').evaluateAll(elements => elements.map(e => e.href));
   expect(links).toHaveLength(40);
@@ -101,18 +106,22 @@ test('browser language, manual choice and persistent color themes', async ({ bro
   await expect(page).toHaveURL(/\/en\/\?area=mobile#projects$/);
   await expect(page.locator('.project-card:visible')).toHaveCount(4);
   expect(await page.locator('html').evaluate(el => getComputedStyle(el).colorScheme)).toBe('dark');
-  await page.locator('[data-theme-choice=light]').click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'system');
+  await page.emulateMedia({ colorScheme: 'light' });
+  await expect(page.locator('.theme-toggle')).toHaveAttribute('data-current', 'light');
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await expect(page.locator('.theme-toggle')).toHaveAttribute('data-current', 'dark');
+  await page.locator('.theme-toggle').click();
   await page.reload();
-  await expect(page.locator('[data-theme-choice=light]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.theme-toggle')).toHaveAttribute('data-current', 'light');
   expect(await page.locator('html').evaluate(el => getComputedStyle(el).colorScheme)).toBe('light');
-  await page.getByRole('link', { name: 'Ler em português' }).click();
+  await page.locator('#language').selectOption('pt');
   await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
-  await page.locator('[data-theme-choice=system]').click();
   await page.emulateMedia({ colorScheme: 'light' });
   expect(await page.locator('html').evaluate(el => getComputedStyle(el).colorScheme)).toBe('light');
   await page.emulateMedia({ colorScheme: 'dark' });
-  expect(await page.locator('html').evaluate(el => getComputedStyle(el).colorScheme)).toBe('dark');
+  expect(await page.locator('html').evaluate(el => getComputedStyle(el).colorScheme)).toBe('light');
   await context.close();
 });

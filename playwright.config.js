@@ -1,7 +1,7 @@
 const { defineConfig } = require('@playwright/test');
 module.exports = defineConfig({
   testDir: './tests', retries: 0, workers: 1, forbidOnly: !!process.env.CI,
-  use: { baseURL: 'http://127.0.0.1:8771', locale: 'pt-BR', screenshot: 'only-on-failure', trace: 'retain-on-failure' },
+  use: { baseURL: 'http://127.0.0.1:8771', locale: 'pt-BR', colorScheme: 'light', screenshot: 'only-on-failure', trace: 'retain-on-failure' },
   reporter: [['list'], ['junit', { outputFile: 'test-results/junit.xml' }], ['html', { open: 'never' }]],
   projects: [
     { name: 'desktop', use: { viewport: { width: 1440, height: 1000 } } },
