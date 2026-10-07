@@ -195,3 +195,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ```
+
+
+## Company marks
+
+Retrieved 2026-10-07 from official company profiles. Square profile images are stored locally, unchanged, to identify employers in the career timeline. Marks belong to their respective owners.
+
+- Mouts: https://www.linkedin.com/company/mouts/ (400 x 400 profile image).
+- Blis AI: https://www.linkedin.com/company/blisai/ (200 x 200 profile image).
+- MB Labs: https://www.linkedin.com/company/mblabs/ (400 x 400 profile image).
+- BRK: https://www.linkedin.com/company/brkambiental/ (100 x 100 profile image).

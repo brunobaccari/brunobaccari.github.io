@@ -21,7 +21,7 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
     await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
     await expect(page.locator('.project-card:visible')).toHaveCount(20);
     await expect(page.locator('.project-card .project-logos')).toHaveCount(20);
-    for (const logo of await page.locator('.project-logos img, .feature-logo').all()) {
+    for (const logo of await page.locator('.project-logos img, .feature-logo, .company-logo img').all()) {
       await logo.scrollIntoViewIfNeeded();
       await expect.poll(() => logo.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
       await expect(logo).toHaveAttribute('alt', '');
