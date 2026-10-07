@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const AxeBuilder = require('@axe-core/playwright').default;
 
 for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en', 'AI', 'All']]) {
-  test(`catalog, filters and accessibility: ${lang}`, async ({ page }) => {
+  test(`catalog, filters and accessibility: ${lang}`, async ({ page }, testInfo) => {
     await page.goto(path);
     await expect(page.locator('html')).toHaveAttribute('lang', lang);
     const canonical = `https://brunobaccari.github.io${path}`;
@@ -15,7 +15,15 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
       mainEntity: { '@type': 'Person', '@id': 'https://brunobaccari.github.io/#bruno-baccari', name: 'Bruno Baccari',
         sameAs: ['https://github.com/brunobaccari', 'https://www.linkedin.com/in/baccari/'] } });
     await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
-    await expect(page.locator('.project-card:visible')).toHaveCount(19);
+    await expect(page.locator('.project-card:visible')).toHaveCount(20);
+    await expect(page.locator('.project-card .project-logos')).toHaveCount(20);
+    for (const logo of await page.locator('.project-logos img, .feature-logo').all()) {
+      await logo.scrollIntoViewIfNeeded();
+      await expect.poll(() => logo.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
+      await expect(logo).toHaveAttribute('alt', '');
+    }
+    await page.locator('#projects').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: testInfo.outputPath('frameworks.png'), fullPage: true });
     await page.getByRole('button', { name: ai, exact: true }).click();
     await expect(page.locator('.project-card:visible')).toHaveCount(2);
     await page.getByRole('searchbox').fill('langchain');
@@ -25,7 +33,7 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
     await expect(page.locator('#empty')).toBeVisible();
     await page.getByRole('button', { name: all, exact: true }).click();
     await page.getByRole('searchbox').fill('');
-    await expect(page.locator('.project-card:visible')).toHaveCount(19);
+    await expect(page.locator('.project-card:visible')).toHaveCount(20);
     await expect(page.locator('#empty')).toBeHidden();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     const audit = await new AxeBuilder({ page }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
@@ -40,7 +48,7 @@ test('language navigation, project destinations and agent index', async ({ page,
   await page.getByRole('link', { name: 'Ler em português' }).click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
   const links = await page.locator('.project-card .card-links a').evaluateAll(elements => elements.map(e => e.href));
-  expect(links).toHaveLength(38);
+  expect(links).toHaveLength(40);
   for (const link of links) expect(link).toMatch(/^https:\/\/github\.com\/brunobaccari\/[a-zA-Z0-9-]+(?:\/actions)?$/);
   const response = await request.get('/llms.txt');
   expect(response.status()).toBe(200);

@@ -46,6 +46,8 @@ Each repository documents its own scope and execution. Offline evaluator or Lang
 - [Java · WireMock shipping](https://github.com/brunobaccari/java-wiremock-shipping): Shipping contracts, timeout handling, invalid responses and recovery of a simulated service.
 - [k6 · API performance](https://github.com/brunobaccari/k6-api-performance): Small hosted QuickPizza smoke suite covering contracts, restrictions, authentication and time limits.
 
+- [Karate · Catalog contracts](https://github.com/brunobaccari/karate-api-catalog): API contracts with Karate and Java, covering pagination, sorting, filters and simulated writes on hosted DummyJSON.
+
 ## Mobile automation
 
 - [Robot Framework · Appium Android cart](https://github.com/brunobaccari/robot-appium-android-cart): Native cart quantity, totals, removal, background resumption and restart using the official Sauce Labs APK.
