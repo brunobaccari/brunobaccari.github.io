@@ -9,6 +9,8 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
     await expect(page.locator('#language')).toHaveValue(lang === 'en' ? 'en' : 'pt');
     await expect(page.locator('.timeline > li')).toHaveCount(4);
     await expect(page.locator('.timeline h3')).toHaveText(['Mouts TI', 'Blis AI', 'MB Labs', 'BRK Ambiental']);
+    await expect(page.locator('.career-attachment')).toHaveCount(4);
+    await expect(page.locator('.education .company-logo img')).toHaveCount(1);
     const canonical = `https://brunobaccari.github.io${path}`;
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
     await expect(page.locator('link[hreflang="pt-BR"]')).toHaveAttribute('href', 'https://brunobaccari.github.io/');
@@ -21,7 +23,7 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
     await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
     await expect(page.locator('.project-card:visible')).toHaveCount(20);
     await expect(page.locator('.project-card .project-logos')).toHaveCount(20);
-    for (const logo of await page.locator('.project-logos img, .feature-logo, .company-logo img').all()) {
+    for (const logo of await page.locator('.project-logos img, .feature-logo, .company-logo img, .career-attachment img').all()) {
       await logo.scrollIntoViewIfNeeded();
       await expect.poll(() => logo.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
       await expect(logo).toHaveAttribute('alt', '');

@@ -17,6 +17,16 @@ Each repository documents its own scope and execution. Offline evaluator or Lang
 - [GitHub](https://github.com/brunobaccari): Public source repositories.
 - [LinkedIn](https://www.linkedin.com/in/baccari/): Professional profile and experience.
 
+## Professional experience
+
+Bruno reports participation in Syde, Banco BMS and Trix Investimentos projects during his QA/Product Owner role at MB Labs. At Banco BMS, he managed a fintech team from January 2025 to March 2026, with responsibilities split equally between QA and Product Owner. At BRK Ambiental, he participated in acceptance testing of the new billing layout with the team responsible for delivery across the company’s operating units. His education is a Computer Science bachelor’s degree from Universidade Paulista (UNIP), 2020–2024.
+
+- [Career timeline](https://brunobaccari.github.io/#experience): Roles, periods and linked product references.
+- [Syde launch — Syngenta](https://www.syngenta.com.br/nova-fintech-do-agro-syngenta-protecao-de-cultivos-lanca-conta-digital-que-oferece-pacote-completo): Product reference attached to his LinkedIn experience.
+- [Trix Investimentos](https://trix.com.br/): Product reference attached to his LinkedIn experience.
+- [Banco BMS](https://bmsscd.com.br/abra-sua-conta/): Official digital-account page.
+- [BRK billing layout — Diário de Justiça](https://diariodejustica.com.br/entenda-mudancas-no-layout-da-conta-de-agua-e-esgoto-em-limeira/): September 29, 2022 reporting about Limeira. This article provides rollout context; Bruno’s role and the team’s nationwide scope are based on his account.
+
 ## Resumes
 
 - [Currículo em português — PDF](https://brunobaccari.github.io/cv/Bruno_Baccari_QA_PTBR.pdf): Download do currículo em português brasileiro.

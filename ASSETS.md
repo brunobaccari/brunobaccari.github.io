@@ -205,3 +205,14 @@ Retrieved 2026-10-07 from official company profiles. Square profile images are s
 - Blis AI: https://www.linkedin.com/company/blisai/ (200 x 200 profile image).
 - MB Labs: https://www.linkedin.com/company/mblabs/ (400 x 400 profile image).
 - BRK: https://www.linkedin.com/company/brkambiental/ (100 x 100 profile image).
+
+- UNIP: https://www.linkedin.com/school/166597/ (100 x 100 profile image shown in Bruno's education section, retrieved 2026-10-07).
+
+## Career attachments
+
+Reviewed 2026-10-07. Trix and Syde links were attached to Bruno's MB Labs experience on [LinkedIn](https://www.linkedin.com/in/baccari/details/experience/). Bruno confirmed that he managed a Banco BMS fintech team from January 2025 until leaving MB Labs in March 2026, splitting responsibilities equally between QA and Product Owner. These sources describe the products; personal contributions are based on Bruno's account, not inferred from company marketing.
+
+- Trix: https://trix.com.br/ — official logo https://trix.com.br/wp-content/uploads/2021/09/TRIX_LOGO_POSITIVO.svg (SVG containing the brand’s 834 × 290 raster). The LinkedIn preview displayed another company’s logo and was discarded.
+- Syde: https://www.syngenta.com.br/nova-fintech-do-agro-syngenta-protecao-de-cultivos-lanca-conta-digital-que-oferece-pacote-completo — article linked from the existing LinkedIn attachment. Official vector logo from https://app.syde.agr.br/assets/img/login-welcome-logo.svg, displayed on its public login page. The article URL was retained from the attachment; direct server retrieval returned 403 during this review.
+- Banco BMS: https://bmsscd.com.br/abra-sua-conta/ — official product page. Logo: https://bmsscd.com.br/wp-content/uploads/2024/08/logo-bms-2.svg (official vector, replacing the 150 × 52 PNG).
+- BRK: https://diariodejustica.com.br/entenda-mudancas-no-layout-da-conta-de-agua-e-esgoto-em-limeira/ — published 2022-09-29, describes the Limeira rollout from October 3. Image credited to BRK: https://diariodejustica.com.br/wp-content/uploads/2022/09/fatura-nova.jpg. Bruno confirmed acceptance-testing participation and the team's delivery across all units in BRK's operating states; the article alone does not establish his role or nationwide scope.
