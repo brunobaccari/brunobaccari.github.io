@@ -28,10 +28,10 @@ jobs:
       - name: Test summary
         if: always()
         env:
-          EXPECTED_TESTS: '6'
+          EXPECTED_TESTS: '8'
           TEST_OUTCOME: ${{ steps.tests.outcome }}
           JUNIT_PATTERN: test-results/junit.xml
-          TEST_SCOPE: 'PT-BR/EN, filters, language navigation, canonical/hreflang, ProfilePage/Person, llms.txt project links, mobile overflow and axe checks. Automated accessibility checks do not replace manual review.'
+          TEST_SCOPE: 'PT-BR/EN, combined filters and shared URLs, contact links, browser language and saved preferences, light/dark/system themes, reduced motion, canonical/hreflang, ProfilePage/Person, llms.txt links, mobile overflow and axe in both themes. Automated accessibility checks do not replace manual review.'
         run: python scripts/summary.py
       - uses: actions/upload-artifact@v4
         if: always()
@@ -67,7 +67,7 @@ jobs:
         env:
           SITE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
-          for path in '' 'en/' 'styles.css' 'site.js' 'robots.txt' 'sitemap.xml' 'llms.txt' 'cv/Bruno_Baccari_QA_PTBR.pdf' 'cv/Bruno_Baccari_QA_EN.pdf'; do
+          for path in '' 'en/' 'styles.css' 'site.js' 'preferences.js' 'robots.txt' 'sitemap.xml' 'llms.txt' 'cv/Bruno_Baccari_QA_PTBR.pdf' 'cv/Bruno_Baccari_QA_EN.pdf'; do
             local_path="$path"
             case "$path" in
               '') local_path='index.html' ;;

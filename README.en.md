@@ -22,7 +22,7 @@ npx playwright install chromium
 npm test
 ```
 
-CI checks both languages on desktop and mobile: combined filters, empty state, navigation, link destinations, overflow and axe. Six tests; failures, skips or incomplete reports block deployment. Summary, JUnit, HTML and failure traces are retained as artifacts for 14 days. Automated accessibility checks do not certify full compliance.
+CI checks both languages on desktop and mobile: combined filters, empty state, navigation, link destinations, overflow and axe. Eight tests; failures, skips or incomplete reports block deployment. Summary, JUnit, HTML and failure traces are retained as artifacts for 14 days. Automated accessibility checks do not certify full compliance.
 
 Only `public/` is deployed. Every push to `main` must pass verification before publishing. After deployment, the pipeline compares the public HTML, assets, robots.txt and sitemap with the published files.
 
@@ -31,3 +31,13 @@ SEO includes canonical URLs, hreflang, a sitemap and ProfilePage/Person data, wi
 [Official GitHub Pages Actions workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
 `public/llms.txt` provides identity, official sources and a project index for agents supporting the [llms.txt proposal](https://llmstxt.org/). Both pages reference it through `rel="describedby"`. Update this index when projects change; it is not a guaranteed ranking signal and does not replace the sitemap or indexing monitoring in Search Console.
+
+## Navigation and visual references
+
+Area and technology filters combine with search. The URL keeps `area`, `stack` and `q`, including language switches; Clear filters restores the catalog. Need-based shortcuts use the same search. Contact is available in the hero, sticky header and closing section. Animation respects `prefers-reduced-motion`.
+
+Visual references reviewed on October 7, 2026: [David Ho](https://dswho2.github.io/) (identity and contact) and [Adam Lim](https://jung028.github.io/) (specialty categories). Original layout and content, keeping the cream, blue and dark palette.
+
+At `/`, browser language selects Portuguese for `pt` and English for other languages. Manual choice is stored in localStorage; `/?lang=pt` forces Portuguese and `/en/` opens English directly. Query and fragment are preserved. Both HTML pages remain accessible without JavaScript. Light/dark/system themes use CSS and local preferences, with no geolocation or external requests.
+
+[Sagar Gupta](https://sagargupta.online/portfolio-react/) also informed the layered dark surfaces and ambient glow.

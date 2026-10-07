@@ -22,7 +22,7 @@ npx playwright install chromium
 npm test
 ```
 
-O CI verifica os dois idiomas em desktop e mobile: filtros combinados, estado vazio, navegação, destinos dos links, overflow e axe. Seis testes; falha, skip ou relatório incompleto bloqueiam a publicação. Summary, JUnit, HTML e traces de falhas ficam nos artifacts por 14 dias. A verificação automatizada de acessibilidade não certifica conformidade completa.
+O CI verifica os dois idiomas em desktop e mobile: filtros combinados, estado vazio, navegação, destinos dos links, overflow e axe. Oito testes; falha, skip ou relatório incompleto bloqueiam a publicação. Summary, JUnit, HTML e traces de falhas ficam nos artifacts por 14 dias. A verificação automatizada de acessibilidade não certifica conformidade completa.
 
 Somente `public/` é publicado. Cada push em `main` passa pelas verificações antes do deploy. Depois, a pipeline compara o HTML, os assets, robots.txt e sitemap servidos no endereço público com os arquivos publicados.
 
@@ -31,3 +31,13 @@ SEO inclui canonical, hreflang, sitemap e ProfilePage/Person, com a mesma identi
 [Publicação oficial do GitHub Pages por Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
 `public/llms.txt` reúne identidade, fontes oficiais e o índice dos projetos para agentes compatíveis com a [proposta llms.txt](https://llmstxt.org/). As páginas apontam para ele com `rel="describedby"`. Ao alterar os projetos, atualize esse índice; ele não é um sinal de ranking garantido nem substitui o sitemap ou o acompanhamento de indexação no Search Console.
+
+## Navegação e referências visuais
+
+Filtros de área e tecnologia combinam com a busca. A URL guarda `area`, `stack` e `q`, inclusive ao trocar de idioma; Limpar filtros restaura o catálogo. Os atalhos por necessidade apontam para essa mesma busca. O contato está na abertura, no cabeçalho fixo e no final. Animações respeitam `prefers-reduced-motion`.
+
+Referências visuais consultadas em 07/10/2026: [David Ho](https://dswho2.github.io/) (identidade e contato) e [Adam Lim](https://jung028.github.io/) (organização por especialidade). Layout e conteúdo próprios, preservando a paleta creme, azul e escuro.
+
+Na entrada `/`, o idioma do navegador escolhe PT-BR para português e inglês para os demais idiomas. A escolha manual fica no localStorage; `/?lang=pt` força a versão portuguesa e `/en/` abre a inglesa diretamente. Query e fragmento são preservados. Sem JavaScript, ambas as páginas continuam disponíveis como HTML. Tema claro/escuro/sistema usa CSS e preferência local, sem geolocalização ou chamadas externas.
+
+[Sagar Gupta](https://sagargupta.online/portfolio-react/) também serviu de referência para superfícies escuras em camadas e brilho ambiente.

@@ -7,8 +7,8 @@ Logos identify tools used by the linked projects; they do not imply endorsement.
 Original artwork, downloaded without redrawing or recoloring.
 
 - `robotframework.svg`: [official repository asset](https://raw.githubusercontent.com/robotframework/visual-identity/main/logo/robot-framework.svg).
-- `appium.svg`: [official repository asset](https://raw.githubusercontent.com/openjs-foundation/artwork/270575392800eb17a02612203f6f0d5868c634a7/projects/appium/appium-icon-mono.svg).
-- `codeceptjs.svg`: [official repository asset](https://raw.githubusercontent.com/codeceptjs/codeceptjs.github.io/c7917445b9a70a9daacf20986c403c3299f5c960/favicon/safari-pinned-tab.svg).
+- `appium-color.svg`: [official repository asset](https://raw.githubusercontent.com/openjs-foundation/artwork/main/projects/appium/appium-icon-color.svg).
+- `codeceptjs-color.svg`: [official repository asset](https://raw.githubusercontent.com/codeceptjs/codeceptjs.github.io/master/logo/icon-violet.svg).
 - `pytest.svg`: [official repository asset](https://raw.githubusercontent.com/pytest-dev/design/master/pytest_logo/pytest_logo_notext.svg).
 - `selenium.svg`: [official repository asset](https://raw.githubusercontent.com/SeleniumHQ/heroku-selenium/2f66891ba030d3aa1f36ab1748c52ba4fb4e057d/selenium-green.svg).
 - `cypress.svg`: [official repository asset](https://raw.githubusercontent.com/cypress-io/cypress/develop/packages/frontend-shared/src/assets/icons/cypress-logo_x16.svg).
@@ -166,3 +166,32 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ## Karate
 
 `karate.svg`: [official Karate repository asset](https://raw.githubusercontent.com/karatelabs/karate/main/karate-core/src/main/resources/io/karatelabs/output/res/karate-logo.svg), MIT project; used to identify the framework.
+
+## Theme controls
+
+Sun, Moon and Desktop SVGs: [Radix Icons](https://github.com/radix-ui/icons/tree/main/packages/radix-icons/icons), retrieved 2026-10-07, inlined with accessibility attributes. Framework artwork remains unaltered; Appium and CodeceptJS now use the official color variants.
+
+```text
+MIT License
+
+Copyright (c) 2022 WorkOS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```

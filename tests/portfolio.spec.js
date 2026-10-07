@@ -35,9 +35,45 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
     await page.getByRole('searchbox').fill('');
     await expect(page.locator('.project-card:visible')).toHaveCount(20);
     await expect(page.locator('#empty')).toBeHidden();
+    await page.locator('#framework').selectOption('robotframework');
+    await expect(page.locator('.project-card:visible')).toHaveCount(2);
+    await page.getByRole('button', { name: 'Mobile', exact: true }).click();
+    await expect(page.locator('.project-card:visible')).toHaveCount(1);
+    await expect(page.locator('.project-card:visible h3')).toContainText('Appium');
+    await page.reload();
+    await expect(page.locator('#framework')).toHaveValue('robotframework');
+    await expect(page.locator('[data-filter=mobile]')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('.project-card:visible')).toHaveCount(1);
+    await page.locator('#reset-filters').click();
+    await expect(page.locator('.project-card:visible')).toHaveCount(20);
+    await expect(page.getByRole('searchbox')).toBeFocused();
+    await expect(page.locator('#reset-filters')).toBeDisabled();
+    await page.getByRole('searchbox').fill('robot framework');
+    await expect(page.locator('.project-card:visible')).toHaveCount(2);
+    await page.locator('#reset-filters').click();
+    await page.locator('.needs a[href="?area=ai#projects"]').click();
+    await expect(page.locator('.project-card:visible')).toHaveCount(2);
+    await page.locator('.language').click();
+    await expect(page.locator('.project-card:visible')).toHaveCount(2);
+    await page.locator('.language').click();
+    await page.locator('#reset-filters').click();
+    await page.locator('.nav-contact').click();
+    await expect(page.locator('#contact')).toBeInViewport();
+    await expect(page.locator('#contact .button')).toHaveAttribute('href', 'https://www.linkedin.com/in/baccari/');
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    expect(await page.locator('.board').evaluate(el => getComputedStyle(el).animationName)).toBe('none');
+    if (testInfo.project.name === 'mobile') await page.setViewportSize({ width: 320, height: 740 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     const audit = await new AxeBuilder({ page }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
     expect(audit.violations).toEqual([]);
+    await page.locator('[data-theme-choice=dark]').click();
+    for (const strip of await page.locator('.project-logos').all()) {
+      expect(await strip.evaluate(el => getComputedStyle(el).backgroundImage)).toBe('none');
+      expect(await strip.evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
+    }
+    await page.screenshot({ path: testInfo.outputPath('dark-theme.png'), fullPage: true });
+    const darkAudit = await new AxeBuilder({ page }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+    expect(darkAudit.violations).toEqual([]);
   });
 }
 
@@ -56,4 +92,27 @@ test('language navigation, project destinations and agent index', async ({ page,
   const index = await response.text();
   expect(index).toMatch(/^# Bruno Baccari/);
   for (const link of links.filter(url => !url.endsWith('/actions'))) expect(index).toContain(`](${link})`);
+});
+
+test('browser language, manual choice and persistent color themes', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ locale: 'en-US', colorScheme: 'dark', baseURL });
+  const page = await context.newPage();
+  await page.goto('/?area=mobile#projects');
+  await expect(page).toHaveURL(/\/en\/\?area=mobile#projects$/);
+  await expect(page.locator('.project-card:visible')).toHaveCount(4);
+  expect(await page.locator('html').evaluate(el => getComputedStyle(el).colorScheme)).toBe('dark');
+  await page.locator('[data-theme-choice=light]').click();
+  await page.reload();
+  await expect(page.locator('[data-theme-choice=light]')).toHaveAttribute('aria-pressed', 'true');
+  expect(await page.locator('html').evaluate(el => getComputedStyle(el).colorScheme)).toBe('light');
+  await page.getByRole('link', { name: 'Ler em português' }).click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
+  await page.goto('/');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
+  await page.locator('[data-theme-choice=system]').click();
+  await page.emulateMedia({ colorScheme: 'light' });
+  expect(await page.locator('html').evaluate(el => getComputedStyle(el).colorScheme)).toBe('light');
+  await page.emulateMedia({ colorScheme: 'dark' });
+  expect(await page.locator('html').evaluate(el => getComputedStyle(el).colorScheme)).toBe('dark');
+  await context.close();
 });
