@@ -21,8 +21,8 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
       mainEntity: { '@type': 'Person', '@id': 'https://brunobaccari.github.io/#bruno-baccari', name: 'Bruno Baccari',
         sameAs: ['https://github.com/brunobaccari', 'https://www.linkedin.com/in/baccari/'] } });
     await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
-    await expect(page.locator('.project-card:visible')).toHaveCount(20);
-    await expect(page.locator('.project-card .project-logos')).toHaveCount(20);
+    await expect(page.locator('.project-card:visible')).toHaveCount(24);
+    await expect(page.locator('.project-card .project-logos')).toHaveCount(24);
     for (const logo of await page.locator('.project-logos img, .feature-logo, .company-logo img, .career-attachment img').all()) {
       await logo.scrollIntoViewIfNeeded();
       await expect.poll(() => logo.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
@@ -39,23 +39,23 @@ for (const [path, lang, ai, all] of [['/', 'pt-BR', 'IA', 'Todos'], ['/en/', 'en
     await expect(page.locator('#empty')).toBeVisible();
     await page.getByRole('button', { name: all, exact: true }).click();
     await page.getByRole('searchbox').fill('');
-    await expect(page.locator('.project-card:visible')).toHaveCount(20);
+    await expect(page.locator('.project-card:visible')).toHaveCount(24);
     await expect(page.locator('#empty')).toBeHidden();
     await page.locator('#framework').selectOption('robotframework');
-    await expect(page.locator('.project-card:visible')).toHaveCount(2);
+    await expect(page.locator('.project-card:visible')).toHaveCount(4);
     await page.getByRole('button', { name: 'Mobile', exact: true }).click();
-    await expect(page.locator('.project-card:visible')).toHaveCount(1);
-    await expect(page.locator('.project-card:visible h3')).toContainText('Appium');
+    await expect(page.locator('.project-card:visible')).toHaveCount(2);
+    await expect(page.locator('.project-card:visible h3')).toHaveText(['Robot · Appium Android', 'Robot · Appium Flutter']);
     await page.reload();
     await expect(page.locator('#framework')).toHaveValue('robotframework');
     await expect(page.locator('[data-filter=mobile]')).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.locator('.project-card:visible')).toHaveCount(1);
+    await expect(page.locator('.project-card:visible')).toHaveCount(2);
     await page.locator('#reset-filters').click();
-    await expect(page.locator('.project-card:visible')).toHaveCount(20);
+    await expect(page.locator('.project-card:visible')).toHaveCount(24);
     await expect(page.getByRole('searchbox')).toBeFocused();
     await expect(page.locator('#reset-filters')).toBeDisabled();
     await page.getByRole('searchbox').fill('robot framework');
-    await expect(page.locator('.project-card:visible')).toHaveCount(2);
+    await expect(page.locator('.project-card:visible')).toHaveCount(4);
     await page.locator('#reset-filters').click();
     await page.locator('.needs a[href="?area=ai#projects"]').click();
     await expect(page.locator('.project-card:visible')).toHaveCount(2);
@@ -91,7 +91,11 @@ test('language navigation, project destinations and agent index', async ({ page,
   await page.locator('#language').selectOption('pt');
   await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
   const links = await page.locator('.project-card .card-links a').evaluateAll(elements => elements.map(e => e.href));
-  expect(links).toHaveLength(40);
+  expect(links).toHaveLength(48);
+  expect(new Set(links).size).toBe(48);
+  for (const repo of ['cypress-serverest', 'robot-selenium-demo', 'RobotFramework-Appium-Flutter-Demo', 'selenium-test-checkout-automation']) {
+    expect(links).toContain(`https://github.com/brunobaccari/${repo}`);
+  }
   for (const link of links) expect(link).toMatch(/^https:\/\/github\.com\/brunobaccari\/[a-zA-Z0-9-]+(?:\/actions)?$/);
   const response = await request.get('/llms.txt');
   expect(response.status()).toBe(200);
@@ -106,7 +110,7 @@ test('browser language, manual choice and persistent color themes', async ({ bro
   const page = await context.newPage();
   await page.goto('/?area=mobile#projects');
   await expect(page).toHaveURL(/\/en\/\?area=mobile#projects$/);
-  await expect(page.locator('.project-card:visible')).toHaveCount(4);
+  await expect(page.locator('.project-card:visible')).toHaveCount(5);
   expect(await page.locator('html').evaluate(el => getComputedStyle(el).colorScheme)).toBe('dark');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'system');
   await page.emulateMedia({ colorScheme: 'light' });

@@ -65,6 +65,13 @@ Bruno reports participation in Syde, Banco BMS and Trix Investimentos projects d
 - [Espresso · Android intents](https://github.com/brunobaccari/espresso-android-intents): Intents, contact result/cancellation and Activity recreation; dialing is intercepted.
 - [Maestro · Android checkout](https://github.com/brunobaccari/maestro-android-checkout): Purchase journey, quantities and negative cases in My Demo App, running on an Android emulator in CI.
 
+## Additional QA projects
+
+- [Cypress · ServeRest UI/API](https://github.com/brunobaccari/cypress-serverest): Login, users and products through the ServeRest UI and API. Unique data per spec, cleanup of created records and CI screenshots.
+- [Robot · SauceDemo](https://github.com/brunobaccari/robot-selenium-demo): Two login and checkout scenarios with SeleniumLibrary. Checks product, quantity, subtotal, tax, total, confirmation and an empty cart.
+- [Robot · Appium Flutter](https://github.com/brunobaccari/RobotFramework-Appium-Flutter-Demo): Android login in Reflectly with page-based keywords. CI checks configuration and dry-run; real execution requires the app, an account and a device.
+- [Selenium · Checkout](https://github.com/brunobaccari/selenium-test-checkout-automation): SauceDemo login, cart and checkout journey with pytest. Checks amounts and purchase confirmation; JUnit and screenshots in artifacts.
+
 ## Optional
 
 - [Website source](https://github.com/brunobaccari/brunobaccari.github.io): Static website and deployment checks.
